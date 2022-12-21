@@ -1,58 +1,12 @@
 import { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
-
+import columns from "./columnProps.js";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
 function App() {
   const [csvData, setCsvData] = useState("");
-  const columns = [
-    {
-      headerName: "Segment Type",
-      field: "Segment Type",
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      flex: 1,
-      tooltipField: "Segment Description",
-    },
-    {
-      headerName: "Segment Description",
-      field: "Segment Description",
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      flex: 1,
-      tooltipField: "Segment Description",
-    },
-    {
-      headerName: "Answer",
-      field: "Answer",
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      flex: 1,
-      tooltipField: "Segment Description",
-    },
-    {
-      headerName: "Count",
-      field: "Count",
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      flex: 1,
-      tooltipField: "Segment Description",
-    },
-    {
-      headerName: "Percentage",
-      field: "Percentage",
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      flex: 1,
-      tooltipField: "Segment Description",
-    },
-  ];
+
   useEffect(() => {
     try {
       const getData = async () => {
@@ -60,19 +14,15 @@ function App() {
         const data = await res.json();
         setCsvData(data);
       };
-
       getData();
     } catch (error) {
-      console.log(error);
+      window.alert("Sorry, can not get data from API...");
     }
   }, []);
 
   const Table = () => {
     return (
-      <div
-        className="ag-theme-alpine"
-        style={{ height: "100vh", width: "100wh" }}
-      >
+      <div className="ag-theme-alpine">
         <AgGridReact rowData={csvData} columnDefs={columns} pagination={true} />
       </div>
     );
