@@ -1,8 +1,26 @@
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
 
 function App() {
-  return (
-  );
+  const [csvData, setCsvData] = useState("");
+
+  useEffect(() => {
+    try {
+      const getData = async () => {
+        const res = await fetch(
+          "https://picnic-api-production.up.railway.app/"
+        );
+        const data = await res.json();
+        setCsvData(data);
+      };
+
+      getData();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  console.log(csvData);
 }
 
 export default App;
