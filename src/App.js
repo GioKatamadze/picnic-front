@@ -7,9 +7,7 @@ function App() {
   useEffect(() => {
     try {
       const getData = async () => {
-        const res = await fetch(
-          "https://picnic-api-production.up.railway.app/"
-        );
+        const res = await fetch(process.env.REACT_APP_API_URL);
         const data = await res.json();
         setCsvData(data);
       };
